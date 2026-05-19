@@ -1,0 +1,10 @@
+// forgot password
+public function  ForgotPassword(){
+    $mail=Mail::send('users.test',[],function($message){
+    $message->to('devgod878@gmail.com')->subject('Test Mail');
+  });
+  if($mail){
+    return response('Email sent successfully');
+  }
+    return view('users.auth.forgot');
+}
