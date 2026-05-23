@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\DB;
 
 class UsersDashboardMiddleware
 {
@@ -29,6 +30,8 @@ class UsersDashboardMiddleware
         View::share('initials',$initials);
         View::share('currency',Auth::guard('users')->user()->currency);
         View::share('url_current',url()->current().'?'.http_build_query(request()->query()));
+        $settings=json_decode(DB::table('settings')->where('key','social_settings')->first()->value ?? '{}');
+        View::share('support_link',$settings->support_link ?? '');
         return $next($request);
     }
 }
