@@ -83,7 +83,7 @@
                 <div class="cont">
                     <svg viewBox="0 0 24 24" fill="CurrentColor" xmlns="http://www.w3.org/2000/svg" height="20" width="20"><path d="M12.0005 3C16.2849 3 20.2196 4.49683 23.3104 6.99607L12.0005 21L0.689941 6.99671C3.78078 4.49709 7.71583 3 12.0005 3Z"></path></svg>
 
-                    <input type="text" readonly placeholder="{{ $currency }}0.0" class="inp input required" name="amount-text">
+                    <input oninput="CalculateTotal(this)" type="text" readonly placeholder="{{ $currency }}0.0" class="inp input required" name="amount-text">
                 </div>
             </div>
             <input type="hidden" class="inp input" name="amount">
@@ -112,7 +112,7 @@
     <template class="mtn-plans">
         <option value="" selected disabled>Click to choose...</option>
  @foreach ($plans['MOBILE_NETWORK']['MTN'][0]['PRODUCT'] as $data)
-        <option value="{{ $data['PRODUCT_ID'] }}" data-id="{{ $data['PRODUCT_ID'] }}" data-amount_text="{{ $currency.number_format(round($data['PRODUCT_AMOUNT']),2) }}" data-amount="{{ round($data['PRODUCT_AMOUNT']) }}">{{ $data['PRODUCT_NAME'] }}</option>
+        <option value="{{ $data['PRODUCT_ID'] }}" data-id="{{ $data['PRODUCT_ID'] }}" data-amount_text="{{ $currency.number_format(round($data['PRODUCT_AMOUNT']) + ($settings->vtu_fee * round($data['PRODUCT_AMOUNT']))/100,2) }}" data-amount="{{ round($data['PRODUCT_AMOUNT']) + ($settings->vtu_fee * round($data['PRODUCT_AMOUNT']))/100 }}">{{ $data['PRODUCT_NAME'] }}</option>
     @endforeach
     </template>
     {{-- airtel plans --}}
@@ -120,21 +120,21 @@
       
         <option value="" selected disabled>Click to choose...</option>
  @foreach ($plans['MOBILE_NETWORK']['Airtel'][0]['PRODUCT'] as $data)
-        <option value="{{ $data['PRODUCT_ID'] }}" data-id="{{ $data['PRODUCT_ID'] }}" data-amount_text="{{ $currency.number_format(round($data['PRODUCT_AMOUNT']),2) }}" data-amount="{{ round($data['PRODUCT_AMOUNT']) }}">{{ $data['PRODUCT_NAME'] }}</option>
+        <option value="{{ $data['PRODUCT_ID'] }}" data-id="{{ $data['PRODUCT_ID'] }}" data-amount_text="{{ $currency.number_format(round($data['PRODUCT_AMOUNT']) + ($settings->vtu_fee * round($data['PRODUCT_AMOUNT']))/100,2) }}" data-amount="{{ round($data['PRODUCT_AMOUNT']) + ($settings->vtu_fee * round($data['PRODUCT_AMOUNT']))/100 }}">{{ $data['PRODUCT_NAME'] }}</option>
     @endforeach
     </template>
       {{-- glo plans --}}
     <template class="glo-plans">
         <option value="" selected disabled>Click to choose...</option>
  @foreach ($plans['MOBILE_NETWORK']['Glo'][0]['PRODUCT'] as $data)
-        <option value="{{ $data['PRODUCT_ID'] }}" data-id="{{ $data['PRODUCT_ID'] }}" data-amount_text="{{ $currency.number_format(round($data['PRODUCT_AMOUNT']),2) }}" data-amount="{{ round($data['PRODUCT_AMOUNT']) }}">{{ $data['PRODUCT_NAME'] }}</option>
+        <option value="{{ $data['PRODUCT_ID'] }}" data-id="{{ $data['PRODUCT_ID'] }}" data-amount_text="{{ $currency.number_format(round($data['PRODUCT_AMOUNT']) + ($settings->vtu_fee * round($data['PRODUCT_AMOUNT']))/100,2) }}" data-amount="{{ round($data['PRODUCT_AMOUNT']) + ($settings->vtu_fee * round($data['PRODUCT_AMOUNT']))/100 }}">{{ $data['PRODUCT_NAME'] }}</option>
     @endforeach
     </template>
       {{-- 9mobile plans --}}
     <template class="m_9mobile-plans">
         <option value="" selected disabled>Click to choose...</option>
  @foreach ($plans['MOBILE_NETWORK']['m_9mobile'][0]['PRODUCT'] as $data)
-        <option value="{{ $data['PRODUCT_ID'] }}" data-id="{{ $data['PRODUCT_ID'] }}" data-amount_text="{{ $currency.number_format(round($data['PRODUCT_AMOUNT']),2) }}" data-amount="{{ round($data['PRODUCT_AMOUNT']) }}">{{ $data['PRODUCT_NAME'] }}</option>
+        <option value="{{ $data['PRODUCT_ID'] }}" data-id="{{ $data['PRODUCT_ID'] }}" data-amount_text="{{ $currency.number_format(round($data['PRODUCT_AMOUNT']) + ($settings->vtu_fee * round($data['PRODUCT_AMOUNT']))/100,2) }}" data-amount="{{ round($data['PRODUCT_AMOUNT']) + ($settings->vtu_fee * round($data['PRODUCT_AMOUNT']))/100 }}">{{ $data['PRODUCT_NAME'] }}</option>
     @endforeach
     </template>
    

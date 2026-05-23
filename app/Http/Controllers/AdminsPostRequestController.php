@@ -128,7 +128,8 @@ class AdminsPostRequestController extends Controller
         'referral_commission' => request('referral_commission'),
         'task' => [
             'penalty' => request('task_penalty')
-        ]
+        ],
+        'vtu_fee' => request('vtu_fee')
         ];
        if(DB::table('settings')->where('key',$key)->exists()){
      DB::table('settings')->where('key',$key)->update([
@@ -200,6 +201,7 @@ class AdminsPostRequestController extends Controller
         $message='Social settings updated success';
         $key='social_settings';
         $value=[
+            'support_link' => request('support_link'),
         'whatsapp_community' => request('whatsapp_community') ?? '',
         'telegram_community' => request('telegram_community') ?? '',
         'site_notification' => request('site_notification') ?? '',

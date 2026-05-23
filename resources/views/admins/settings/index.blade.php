@@ -120,6 +120,17 @@
                 </div>
               
                   </div>
+                   {{-- new input --}}
+            <div class="column g-5 w-full">
+               <div class="column g-2">
+                 <label >VTU Fee (%)</label>
+                <small class="opacity-05">Fee charged for each VTU transaction in % , Note this is your profit</small>
+                </div> 
+                <div class="cont">
+                    <input value="{{ $general_settings->vtu_fee ?? '' }}" name="vtu_fee" type="number" placeholder="E.g 10%" class="inp required input">
+                </div>
+              
+                  </div>
           
             {{-- submit button --}}
             <button class="post">
@@ -282,6 +293,17 @@
             </div>
             {{-- csrf token --}}
             <input type="hidden" class="inp input" name="_token" value="{{ @csrf_token() }}">
+          {{-- new input --}}
+            <div class="column g-5 w-full">
+               <div class="column g-2">
+                 <label>Support Link</label>
+                <small class="opacity-05">Platform support link(whatsapp)</small>
+                </div> 
+                <div class="cont">
+                    <input value="{{ $social_settings->support_link ?? '' }}" name="support_link" type="url" placeholder="E.g https://platform-support-link" class="inp required input">
+                </div>
+              
+                  </div>
             {{-- new input --}}
             <div class="column g-5 w-full">
                <div class="column g-2">

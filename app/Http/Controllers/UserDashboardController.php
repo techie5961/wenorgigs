@@ -261,7 +261,10 @@ public function ShoppingHistory(){
 
 // airtime vtu
 public function AirtimeVTU(){
-     return view('users.vtu.airtime');
+    $settings=json_decode(DB::table('settings')->where('key','general_settings')->first()->value ?? '{}');
+     return view('users.vtu.airtime',[
+        'settings' => $settings
+     ]);
 }
 // data vtu
 public function DataVTU(){
@@ -275,8 +278,11 @@ public function DataVTU(){
         return abort(403,'Internal Server Error');
     }
 //    return $data;
+   $settings=json_decode(DB::table('settings')->where('key','general_settings')->first()->value ?? '{}');
+  
     return view('users.vtu.data',[
-        'plans' => $data
+        'plans' => $data,
+         'settings' => $settings
     ]);
 }
 
