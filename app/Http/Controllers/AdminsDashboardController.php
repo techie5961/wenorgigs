@@ -249,6 +249,9 @@ class AdminsDashboardController extends Controller
         if(request()->has('status')){
             $proofs=$proofs->where('status',request('status'));
         }
+        if(request()->has('task_id')){
+            $proofs=$proofs->where('task->id',request('task_id'));
+        }
         $proofs=$proofs->orderBy('date','desc')->paginate(10);
 
         $proofs->getCollection()->transform(function($each){
