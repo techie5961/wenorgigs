@@ -942,7 +942,6 @@ class UsersPostRequestController extends Controller
         $number=request('number');
         $amount=request('amount');
         $settings=json_decode(DB::table('settings')->where('key','general_settings')->first()->value ?? '{}');
-        $amount=$amount + ($settings->vtu_fee * $amount)/100;
         $network=json_decode(request('network'));
         $network_id=$network->id;
         $network_name=$network->name;
@@ -954,7 +953,7 @@ class UsersPostRequestController extends Controller
                 'status' => 'error'
             ]);
         }
-      if(Auth::guard('users')->user()->deposit_balance < $amount){
+      if(Auth::guard('users')->user()->deposit_balance <  ($amount + ($settings->vtu_fee * $amount)/100)){
         return response()->json([
             'message' => 'Insufficient balance, kindly fund your account to continue',
             'status' => 'error'
@@ -972,6 +971,7 @@ class UsersPostRequestController extends Controller
      ]);
 
       if($response->successful()){
+        $amount=$amount + ($settings->vtu_fee * $amount)/100;
         $data=$response->json();
         $status=$data['status'];
         if($status == 'ORDER_RECEIVED'){
