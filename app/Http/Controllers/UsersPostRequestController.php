@@ -947,8 +947,9 @@ class UsersPostRequestController extends Controller
         $network_id=$network->id;
         $network_name=$network->name;
         $request_id=GenerateID();
-        $settings=json_decode(DB::table('settings')->where('key','finance_settings')->first()->value ?? '{}');
-        if($settings->vtu->portal == 'off'){
+        $finance_settings=json_decode(DB::table('settings')->where('key','finance_settings')->first()->value ?? '{}');
+        $settings=json_decode(DB::table('settings')->where('key','general_settings')->first()->value ?? '{}');
+        if($finance_settings->vtu->portal == 'off'){
             return response()->json([
                 'message' => 'VTU portal is currently off',
                 'status' => 'error'
