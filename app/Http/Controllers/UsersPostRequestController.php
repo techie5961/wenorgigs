@@ -939,7 +939,8 @@ class UsersPostRequestController extends Controller
 
     // purchase airtime
     public function PurchaseAirtime(){
-        $number=request('number');
+        try{
+             $number=request('number');
         $amount=request('amount');
         $settings=json_decode(DB::table('settings')->where('key','general_settings')->first()->value ?? '{}');
         $network=json_decode(request('network'));
@@ -1023,6 +1024,14 @@ class UsersPostRequestController extends Controller
         'message' => 'Internal server error,please try again later',
         'status' => 'error'
       ]);
+
+        }catch(\Exception $e){
+            return response()->json([
+                'message' => $e->getMessage(),
+                'status' => 'info'
+            ]);
+        }
+       
     }
 
      // purchase data
